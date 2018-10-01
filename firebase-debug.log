@@ -1,0 +1,129 @@
+[debug] [2018-09-20T08:17:43.360Z] ----------------------------------------------------------------------
+[debug] [2018-09-20T08:17:43.364Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andrii_Skvortsov\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-20T08:17:43.364Z] CLI Version:   4.2.1
+[debug] [2018-09-20T08:17:43.364Z] Platform:      win32
+[debug] [2018-09-20T08:17:43.364Z] Node Version:  v6.10.0
+[debug] [2018-09-20T08:17:43.365Z] Time:          Thu Sep 20 2018 11:17:43 GMT+0300 (FLE Daylight Time)
+[debug] [2018-09-20T08:17:43.365Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-20T08:17:43.384Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-20T08:17:43.384Z] > authorizing via signed-in user
+[debug] [2018-09-20T08:17:43.387Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-20T08:17:43.387Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+
+[debug] [2018-09-20T08:17:43.630Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T08:17:43.642Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T08:17:44.435Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T08:17:44.437Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T08:17:45.480Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\DRIVE\VIDEO\fcm'...
+[info] 
+[debug] [2018-09-20T08:17:45.484Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/624325475971/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-20T08:17:45.990Z] <<< HTTP RESPONSE 200
+[info] i  hosting[video-notification]: Serving hosting files from: public
+[info] +  hosting[video-notification]: Local server: http://localhost:5000
+[debug] [2018-09-20T08:20:14.130Z] ----------------------------------------------------------------------
+[debug] [2018-09-20T08:20:14.133Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andrii_Skvortsov\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-20T08:20:14.134Z] CLI Version:   4.2.1
+[debug] [2018-09-20T08:20:14.134Z] Platform:      win32
+[debug] [2018-09-20T08:20:14.134Z] Node Version:  v6.10.0
+[debug] [2018-09-20T08:20:14.135Z] Time:          Thu Sep 20 2018 11:20:14 GMT+0300 (FLE Daylight Time)
+[debug] [2018-09-20T08:20:14.135Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-20T08:20:14.152Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-20T08:20:14.153Z] > authorizing via signed-in user
+[debug] [2018-09-20T08:20:14.155Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T08:20:14.904Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T08:20:14.906Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T08:20:15.870Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\DRIVE\VIDEO\fcm'...
+[info] 
+[debug] [2018-09-20T08:20:15.884Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/624325475971/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-20T08:20:16.269Z] <<< HTTP RESPONSE 200
+[info] i  hosting[video-notification]: Serving hosting files from: public
+[info] +  hosting[video-notification]: Local server: http://localhost:5000
+[debug] [2018-09-20T13:52:39.245Z] ----------------------------------------------------------------------
+[debug] [2018-09-20T13:52:39.248Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andrii_Skvortsov\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-20T13:52:39.249Z] CLI Version:   4.2.1
+[debug] [2018-09-20T13:52:39.249Z] Platform:      win32
+[debug] [2018-09-20T13:52:39.249Z] Node Version:  v6.10.0
+[debug] [2018-09-20T13:52:39.250Z] Time:          Thu Sep 20 2018 16:52:39 GMT+0300 (FLE Daylight Time)
+[debug] [2018-09-20T13:52:39.250Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-20T13:52:39.264Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-20T13:52:39.264Z] > authorizing via signed-in user
+[debug] [2018-09-20T13:52:39.268Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T13:52:40.023Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T13:52:40.028Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T13:52:41.022Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\DRIVE\VIDEO\fcm'...
+[info] 
+[debug] [2018-09-20T13:52:41.034Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/624325475971/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-20T13:52:42.129Z] <<< HTTP RESPONSE 200
+[warn] !  hosting: Port 5000 is not available. Trying another port...
+[info] i  hosting[video-notification]: Serving hosting files from: public
+[info] +  hosting[video-notification]: Local server: http://localhost:5005
+[debug] [2018-09-20T14:16:01.977Z] ----------------------------------------------------------------------
+[debug] [2018-09-20T14:16:01.980Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andrii_Skvortsov\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-20T14:16:01.981Z] CLI Version:   4.2.1
+[debug] [2018-09-20T14:16:01.981Z] Platform:      win32
+[debug] [2018-09-20T14:16:01.981Z] Node Version:  v6.10.0
+[debug] [2018-09-20T14:16:01.982Z] Time:          Thu Sep 20 2018 17:16:01 GMT+0300 (FLE Daylight Time)
+[debug] [2018-09-20T14:16:01.982Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-20T14:16:01.998Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-20T14:16:01.998Z] > authorizing via signed-in user
+[debug] [2018-09-20T14:16:02.001Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T14:16:03.221Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T14:16:03.225Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T14:16:04.203Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\DRIVE\VIDEO\fcm'...
+[info] 
+[debug] [2018-09-20T14:16:04.215Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/624325475971/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-20T14:16:05.218Z] <<< HTTP RESPONSE 200
+[info] i  hosting[video-notification]: Serving hosting files from: public
+[info] +  hosting[video-notification]: Local server: http://localhost:5000
+[debug] [2018-09-20T14:59:25.323Z] ----------------------------------------------------------------------
+[debug] [2018-09-20T14:59:25.326Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Andrii_Skvortsov\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-20T14:59:25.327Z] CLI Version:   4.2.1
+[debug] [2018-09-20T14:59:25.327Z] Platform:      win32
+[debug] [2018-09-20T14:59:25.327Z] Node Version:  v6.10.0
+[debug] [2018-09-20T14:59:25.328Z] Time:          Thu Sep 20 2018 17:59:25 GMT+0300 (FLE Daylight Time)
+[debug] [2018-09-20T14:59:25.328Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-20T14:59:25.346Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-20T14:59:25.346Z] > authorizing via signed-in user
+[debug] [2018-09-20T14:59:25.350Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-20T14:59:25.350Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+
+[debug] [2018-09-20T14:59:26.344Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T14:59:26.365Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T14:59:27.489Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-20T14:59:27.493Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/video-notification  
+ 
+[debug] [2018-09-20T14:59:28.791Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\DRIVE\VIDEO\fcm'...
+[info] 
+[debug] [2018-09-20T14:59:28.802Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/624325475971/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-20T14:59:29.843Z] <<< HTTP RESPONSE 200
+[info] i  hosting[video-notification]: Serving hosting files from: public
+[info] +  hosting[video-notification]: Local server: http://localhost:5000

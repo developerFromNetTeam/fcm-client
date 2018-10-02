@@ -1,1 +1,2 @@
 https://firebase.google.com/docs/cloud-messaging/http-server-ref
+https://firebase.google.com/docs/cloud-messaging/send-message#send_messages_using_the_legacy_app_server_protocols

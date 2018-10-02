@@ -3,103 +3,43 @@
   <head>
     <meta charset="utf-8">
     <title>Welcome to Firebase Hosting</title>
-<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
 	<link rel="manifest" href="/manifest.json">
 	<script>
-	  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBAA5Ib-dYSLHC2pBHFU566NAQBcH9yUS8",
-    authDomain: "video-notification.firebaseapp.com",
-    databaseURL: "https://video-notification.firebaseio.com",
-    projectId: "video-notification",
-    storageBucket: "video-notification.appspot.com",
-    messagingSenderId: "624325475971"
-  };
-  firebase.initializeApp(config);
+	  var config = {
+		apiKey: "AIzaSyBAA5Ib-dYSLHC2pBHFU566NAQBcH9yUS8",
+		authDomain: "video-notification.firebaseapp.com",
+		databaseURL: "https://video-notification.firebaseio.com",
+		projectId: "video-notification",
+		storageBucket: "video-notification.appspot.com",
+		messagingSenderId: "624325475971"
+	  };
+	  firebase.initializeApp(config);
 	  const messaging = firebase.messaging();
 	  messaging.usePublicVapidKey('BBuPGXyht4Xeao-S1OhAdo9DdUZ0y3Oa3xF78NvwVcE9Ikkqvstqmz6qGPmKquM8BlDqwH_qa17zWynjar-ctRs');
 	  
 	  messaging.requestPermission()
 		.then(function() {
-		debugger;
 			messaging.getToken().then(function(currentToken){
-				document.getElementById('token').innerHTML = currentToken;
+				$.ajax({
+						  type: "POST",
+						  url: "http://localhost:1041/api/client-token",
+						  data: JSON.stringify(currentToken),
+						  success: function(data, status){
+						  },
+						  contentType: "application/json; charset=utf-8"
+						});
 			});
 		})
-	
-	messaging.onMessage(function(payload) {
-	debugger;
-		alert('recived');
-		// ...
-	});
+
+		messaging.onMessage(function(payload) {
+			window.location = payload.notification.click_action;
+		});
 	  
 	</script>
-    <style media="screen">
-      body {
-        font-family: Roboto, Arial, sans-serif;
-        background: #ECEFF1;
-        color: rgba(0,0,0,0.87);
-      }
-
-      a {
-        color: rgb(3,155,229);
-      }
-
-      #message {
-        max-width: 400px;
-        margin: 40px auto;
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
-        border-radius: 2px;
-        background: white;
-        padding: 16px 24px;
-      }
-
-      #message h1 {
-        font-size: 22px;
-        font-weight: 500;
-        text-align: center;
-        margin: 0 0 16px;
-      }
-
-      #message p {
-        font-weight: 300;
-        line-height: 150%;
-      }
-
-      #message ul {
-        list-style: none;
-        margin: 16px 0 0;
-        padding: 0;
-        text-align: center;
-      }
-
-      #message li a {
-        display: inline-block;
-        padding: 8px;
-        text-transform: uppercase;
-        text-decoration: none;
-        font-weight: 500;
-        background: rgb(3,155,229);
-        color: white;
-        border: 1px solid rgb(3,155,229);
-        border-radius: 3px;
-        font-size: 14px;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-      }
-    </style>
   </head>
   <body>
-    <div id="message">
       <h1>Welcome to Firebase Hosting</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <ul>
-        <li><a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a></li>
-      </ul>
-    </div>
-	<div>
-		Hello World
-	</div>
-	<div id="token">
-	</div>
   </body>
 </html>

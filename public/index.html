@@ -2,11 +2,40 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Video controll system</title>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
 	<link rel="manifest" href="/manifest.json">
+	<style>
+		.centr{
+			text-align: center;
+		}
+		.camera{
+		    margin-top: 10px;
+			font-size: 20px;
+		}
+		.button{
+			margin-top: 10px;
+			font-size: 20px;
+		}
+		#cameraInfo{
+			display: none;
+		}
+		#login{
+			display: none;
+		}
+		.loginForm{
+			text-align: center;
+			width: 173px;
+			margin: auto;
+		}
+	</style>
 	<script>
+	
+$(function() {
+	camerasNotificationData = null;
+	cookieName="authCookie";
+	serverUrl = "http://localhost:1042";
 	  var config = {
 		apiKey: "AIzaSyBAA5Ib-dYSLHC2pBHFU566NAQBcH9yUS8",
 		authDomain: "video-notification.firebaseapp.com",
@@ -18,28 +47,189 @@
 	  firebase.initializeApp(config);
 	  const messaging = firebase.messaging();
 	  messaging.usePublicVapidKey('BBuPGXyht4Xeao-S1OhAdo9DdUZ0y3Oa3xF78NvwVcE9Ikkqvstqmz6qGPmKquM8BlDqwH_qa17zWynjar-ctRs');
-	  
-	  messaging.requestPermission()
-		.then(function() {
-			messaging.getToken().then(function(currentToken){
-				$.ajax({
-						  type: "POST",
-						  url: "http://localhost:1041/api/client-token",
-						  data: JSON.stringify(currentToken),
-						  success: function(data, status){
-						  },
-						  contentType: "application/json; charset=utf-8"
-						});
-			});
-		})
 
-		messaging.onMessage(function(payload) {
+	  messaging.onMessage(function(payload) {
 			window.location = payload.notification.click_action;
 		});
 	  
+	  registerEventHandlers();
+	  
+	  var currentCookie = getCookie(cookieName);
+	  if(currentCookie == null || currentCookie == "")
+	  {
+		$("#login").show();
+	  }
+	  else{
+	  debugger;
+		$("#cameraInfo").show();
+		  messaging.requestPermission()
+			.then(function() {
+				messaging.getToken().then(function(currentToken){
+					updateFcmToken(currentToken);
+				});
+			});
+	  }
+});
+		function clearLoginForm(){
+			$("#login-input").val('');
+			$("#pass-input").val('');
+		}
+		function registerEventHandlers(){
+			$("#login-button").click(function(){
+				var login = $("#login-input").val();
+				var pass = $("#pass-input").val();
+				getIpInfo(function(data){
+					loginUser(login, pass, data.ip, data.city);
+				});
+			});
+			
+			$("#logout-button").click(function(){
+				logoutUser();
+			});
+			
+			$("#update-button").click(function(){
+				saveCamerasNotification();
+			});
+		}
+		function logoutUser(){
+				$.ajax({
+				  type: "POST",
+				  url: serverUrl+"/api/auth/logout",
+				  headers:{
+					"auth-token":getCookie(cookieName)
+				  },
+				  success: function(data, status,jqxhr){ 
+					$("#login").show();
+					$("#cameraInfo").hide();
+					setCookie(cookieName, null);
+				  },
+				  error:function(data, status,jqxhr){ 
+				  },
+				  contentType: "application/json;"
+				});
+		}
+		function loginUser(login, pass, ip, city){
+			$.ajax({
+				  type: "POST",
+				  url: serverUrl+"/api/auth/login",
+				  dataType: 'json', 
+				  data: JSON.stringify({"login":login,"pass":pass,"ipAddress":ip,"city":city}),
+				   success: function(data, status,jqxhr ){
+					setCookie(cookieName, data, 1);
+					$("#login").hide();
+					clearLoginForm();
+					loadNotificationOptions();
+				  },
+				  error:function(returnval){ 
+				  },
+				  contentType: "application/json;"
+				});
+		}
+		function getIpInfo(data){
+			$.get( "https://ipinfo.io/json", data);
+		}
+		function updateFcmToken(token){
+			$.ajax({
+				  type: "POST",
+				  url: serverUrl+"/api/client-token/set",
+				  data: JSON.stringify(token),
+				  headers:{
+					"auth-token":getCookie(cookieName)
+				  },
+				   success: function(data, status,jqxhr ){
+					loadNotificationOptions();
+				  }, 
+				  error:function(returnval){ 
+					$("#login").show();
+					$("#cameraInfo").hide();
+				  },
+				  contentType: "application/json; charset=utf-8"
+				});
+		}
+		function loadNotificationOptions(){
+			$.ajax({
+				  type: "Get",
+				  url: serverUrl+"/api/notification-options/load",
+				  dataType: 'json',
+				  headers:{
+					"auth-token":getCookie(cookieName)
+				  },
+				  success: function(data, status,jqxhr ){
+					setCamerasNotification(data);
+				  },
+				  error:function(returnval){ 
+				  },
+				  contentType: "application/json;"
+				});
+		}
+		function setCookie(name,value,days) {
+			var expires = "";
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime() + (days*24*60*60*1000));
+				expires = "; expires=" + date.toUTCString();
+			}
+			document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+		}
+		function getCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+		function setCamerasNotification(data){
+			$("#cameraInfo").show();
+			$("#camerasInfo").empty();
+			camerasNotificationData = data;
+			$.each(data, function( index, item ) {
+				var isChecked = item.isNotificationEnable ? 'checked' : '';
+				$("#camerasInfo").prepend("<div class='camera'><label class='pading'>"+item.cameraUserName+" ("+item.cameraSystemName+")"+"<input type='checkbox'"+isChecked+" name='"+item.cameraSystemName+"' id='"+item.cameraSystemName+"'></label></div>")
+			});
+		}
+		function saveCamerasNotification(){
+			$.each(camerasNotificationData, function( index, item ) {
+				item.isNotificationEnable = $("#"+item.cameraSystemName).prop( "checked" );
+			});
+			$.ajax({
+				  type: "POST",
+				  url: serverUrl+"/api/notification-options/save",
+				  data: JSON.stringify(camerasNotificationData),
+				  headers:{
+					"auth-token":getCookie(cookieName)
+				  },
+				   success: function(data, status,jqxhr ){
+				  }, 
+				  error:function(returnval){ 
+				  },
+				  contentType: "application/json; charset=utf-8"
+				});
+		}
 	</script>
   </head>
   <body>
-      <h1>Welcome to Firebase Hosting</h1>
+	<div id="login" class="centr">
+		<div class="loginForm">
+			Login: <input type="text" name="login" id="login-input"><br>
+			Pass: <input type="password" name="pass" id="pass-input"><br>
+			<button class="button" type="button" id="login-button">Login</button>
+		</div>
+		
+	</div>
+	<div id="cameraInfo">
+		  <h1 class="centr">Send notification from:</h1>
+		  <div class="centr" id="camerasInfo">
+		  </div>
+		  <div class="centr">
+		  <button class="button" type="button" id="logout-button">Logout</button>
+		  <button class="button" type="button" id="update-button">Update</button>
+			</div>
+	</div>
+	<div id="requestInfo">
+		
+	</div>
   </body>
 </html>

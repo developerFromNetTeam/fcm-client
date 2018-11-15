@@ -45,7 +45,7 @@ $(function() {
 		messagingSenderId: "624325475971"
 	  };
 	  firebase.initializeApp(config);
-	  const messaging = firebase.messaging();
+	  messaging = firebase.messaging();
 	  messaging.usePublicVapidKey('BBuPGXyht4Xeao-S1OhAdo9DdUZ0y3Oa3xF78NvwVcE9Ikkqvstqmz6qGPmKquM8BlDqwH_qa17zWynjar-ctRs');
 
 	  messaging.onMessage(function(payload) {
@@ -60,16 +60,18 @@ $(function() {
 		$("#login").show();
 	  }
 	  else{
-	  debugger;
 		$("#cameraInfo").show();
+		requestPermission();
+	  }
+});
+		function requestPermission(){
 		  messaging.requestPermission()
 			.then(function() {
 				messaging.getToken().then(function(currentToken){
 					updateFcmToken(currentToken);
 				});
 			});
-	  }
-});
+		}
 		function clearLoginForm(){
 			$("#login-input").val('');
 			$("#pass-input").val('');
@@ -118,7 +120,7 @@ $(function() {
 					setCookie(cookieName, data, 1);
 					$("#login").hide();
 					clearLoginForm();
-					loadNotificationOptions();
+					requestPermission();
 				  },
 				  error:function(returnval){ 
 				  },

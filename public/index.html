@@ -97,6 +97,13 @@ $(function() {
 				startLoader();
 				logoutUser();
 			});
+
+			$("#getvideos-button").click(function(){
+				startLoader();
+				var fromDate = $("#from-input").val();
+				var toDate = $("#to-input").val();
+				loadVideos(fromDate, toDate);
+			});
 			
 			$("#update-button").click(function(){
 				startLoader();
@@ -164,6 +171,27 @@ $(function() {
 				  contentType: "application/json; charset=utf-8"
 				});
 		}
+		function loadVideos(fromDate, toDate){
+			$.ajax({
+				  type: "Get",
+				  url: serverUrl+"/api/captured-video/load?from="+fromDate+"&to="+toDate,
+				  dataType: 'json',
+				  headers:{
+					"auth-token":getCookie(cookieName)
+				  },
+				  success: function(data, status,jqxhr ){
+					finishLoader();
+				  },
+				  error:function(data){
+					showError(data.status + ', ' + data.statusText + ': '+ data.responseJSON);
+					$("#login").show();
+					$("#cameraInfo").hide();
+					finishLoader();
+				  },
+				  contentType: "application/json;"
+				});
+		}
+		
 		function loadNotificationOptions(){
 			$.ajax({
 				  type: "Get",
@@ -261,6 +289,12 @@ $(function() {
 			<div class="centr">
 				<button class="button" type="button" id="logout-button">Logout</button>
 				<button class="button" type="button" id="update-button">Update</button>
+			</div>
+			<div class="centr">
+				<h1 class="centr">Load videos</h1>
+				From: <input type="text" name="from" id="from-input"> To: <input type="text" name="to" id="to-input"><br>
+				<button class="button" type="button" id="getvideos-button">Get videos</button>
+				<div class="centr" id="loadedVideosInfo"></div>
 			</div>
 		</div>
 	</div>

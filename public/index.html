@@ -11,6 +11,10 @@
 		.centr{
 			text-align: center;
 		}
+		.videosclass{
+			padding-top: 10px;
+			font-size: 25px;
+		}
 		#loading {
 			display:none;
 		   width: 100%;
@@ -102,7 +106,8 @@ $(function() {
 				startLoader();
 				var fromDate = $("#from-input").val();
 				var toDate = $("#to-input").val();
-				loadVideos(fromDate, toDate);
+				var count = $("#count-input").val();
+				loadVideos(fromDate, toDate, count);
 			});
 			
 			$("#update-button").click(function(){
@@ -171,27 +176,32 @@ $(function() {
 				  contentType: "application/json; charset=utf-8"
 				});
 		}
-		function loadVideos(fromDate, toDate){
+		function loadVideos(fromDate, toDate, count){
 			$.ajax({
 				  type: "Get",
-				  url: serverUrl+"/api/captured-video/load?from="+fromDate+"&to="+toDate,
+				  url: serverUrl+"/api/captured-video/load?from="+fromDate+"&to="+toDate+"&count="+count,
 				  dataType: 'json',
 				  headers:{
 					"auth-token":getCookie(cookieName)
 				  },
 				  success: function(data, status,jqxhr ){
+					setloadedVideosInfo(data);
 					finishLoader();
 				  },
 				  error:function(data){
 					showError(data.status + ', ' + data.statusText + ': '+ data.responseJSON);
-					$("#login").show();
-					$("#cameraInfo").hide();
 					finishLoader();
 				  },
 				  contentType: "application/json;"
 				});
 		}
 		
+		function setloadedVideosInfo(data){
+			$("#loadedVideosInfo").empty();
+			$.each(data, function( index, item ) {
+				$("#loadedVideosInfo").prepend("<div class='videosclass'><a target='_blank' rel='noopener noreferrer' href='"+item.urlPath+"'>"+item.cameraName+" at "+item.date+"</></div>");
+			});
+		}
 		function loadNotificationOptions(){
 			$.ajax({
 				  type: "Get",
@@ -292,7 +302,7 @@ $(function() {
 			</div>
 			<div class="centr">
 				<h1 class="centr">Load videos</h1>
-				From: <input type="text" name="from" id="from-input"> To: <input type="text" name="to" id="to-input"><br>
+				From: <input type="date" name="from" id="from-input"> To: <input type="date" name="to" id="to-input"> Count: <input type="number" name="to" id="count-input"><br>
 				<button class="button" type="button" id="getvideos-button">Get videos</button>
 				<div class="centr" id="loadedVideosInfo"></div>
 			</div>
